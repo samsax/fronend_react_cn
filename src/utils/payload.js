@@ -1,6 +1,6 @@
 export default function(){
 
-	const token = localStorage.getItem('blogToken')
+	const token = localStorage.getItem('mapToken')
 
 	if(token){
 		const baseUri =  token.split('.')[1];

@@ -3,14 +3,14 @@ import {createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-const API_URL = 'https://backendblog-fvron8vkq.now.sh/';
+const API_URL = 'https://cintanegra4.herokuapp.com/';
 
 const httpLink = createHttpLink({
 	uri:API_URL
 });
 
 const authLink = setContext((_,{headers}) => {
-	const token = localStorage.getItem('blogToken');
+	const token = localStorage.getItem('mapToken');
 	const context = {
 		headers:{
 			...headers
