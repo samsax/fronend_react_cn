@@ -20,7 +20,7 @@ function Navbar() {
 							payload().isAuthenticated ? (
 								<>
 									<li className="nav-item">
-										<Link to="/" className="nav-link">Hola {payload().user.email}!!!</Link>
+										<Link to="/me" className="nav-link">Hola {payload().user.email}!!!</Link>
 									</li>
 		
 									<li className="nav-item">
