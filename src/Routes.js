@@ -5,6 +5,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import Profile from './views/Profile';
 import AddZone from './views/AddZone';
+import SignupComponet from './components/user/signup';
 
 function Logout(){
 	localStorage.removeItem('mapToken')
@@ -22,6 +23,7 @@ function Routes() {
     <Route exact path="/me" component={Profile} />
     <Route exact path="/zone/new" component={AddZone} />
 
+    <Route exact path="/signup" component={SignupComponet} />
    </>
   );
 }
