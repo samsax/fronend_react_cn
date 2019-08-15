@@ -4,6 +4,7 @@ import isAuthenticated from './utils/isAuthenticated';
 import Home from './views/Home';
 import Login from './views/Login';
 import Profile from './views/Profile';
+import AddZone from './views/AddZone';
 
 function Logout(){
 	localStorage.removeItem('mapToken')
@@ -15,10 +16,12 @@ const SecureLogout = isAuthenticated(Logout);
 function Routes() {
   return (
    <>
-		<Route exact path="/" component={Home} />
+		<Route exact path="/" component={ (props) => <Home {...props} />} />
     <Route exact path="/login" component={Login} />
 		<Route exact path="/logout" component={SecureLogout} />
     <Route exact path="/me" component={Profile} />
+    <Route exact path="/zone/new" component={AddZone} />
+
    </>
   );
 }
