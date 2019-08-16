@@ -1,28 +1,27 @@
 import { ApolloClient } from 'apollo-client';
-import {createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-
-const API_URL = 'https://cintanegra4.herokuapp.com/';
-
-const httpLink = createHttpLink({
-	uri:API_URL
+import { createUploadLink } from 'apollo-upload-client';
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
+const HTTP_HOST = 'https://cintanegrasamuel.herokuapp.com/';
+const httpLink = new createUploadLink({
+  uri: HTTP_HOST
 });
-
-const authLink = setContext((_,{headers}) => {
-	const token = localStorage.getItem('mapToken');
-	const context = {
-		headers:{
-			...headers
-		}
-	}
-	if(token) context.headers['authorization'] = `JWT ${token}`
-
-	return context;
-	
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  link: ApolloLink.from([
+    onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors) {
+        graphQLErrors.map(({ message, locations, path, extensions }) => {
+          console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
+        });
+        if (networkError) {
+          console.log(`[Network error]: ${networkError}`);
+        }
+      }
+    }),
+    httpLink,
+  ]),
+  cache,
 });
-
-export default new ApolloClient({
-	link:authLink.concat(httpLink),
-	cache:new InMemoryCache()
-});
+export default client;

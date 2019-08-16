@@ -8,6 +8,7 @@ import client from './graphql'
 import Routes from './Routes';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
+import "leaflet-draw/dist/leaflet.draw.css";
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
